@@ -797,6 +797,13 @@ impl HpkePrivateKey {
     }
 }
 
+#[cfg(feature = "hazmat")]
+impl AsRef<Vec<u8>> for HpkePrivateKey {
+    fn as_ref(&self) -> &Vec<u8> {
+        &self.value
+    }
+}
+
 impl From<Vec<u8>> for HpkePrivateKey {
     fn from(b: Vec<u8>) -> Self {
         Self::new(b)
@@ -853,6 +860,12 @@ impl HpkePublicKey {
     /// Get the raw key as byte slice.
     pub fn as_slice(&self) -> &[u8] {
         self.value.as_slice()
+    }
+}
+
+impl AsRef<Vec<u8>> for HpkePublicKey {
+    fn as_ref(&self) -> &Vec<u8> {
+        &self.value
     }
 }
 
